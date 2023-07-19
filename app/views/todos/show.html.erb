@@ -8,3 +8,13 @@
 
   <%= button_to "Destroy this todo", @todo, method: :delete %>
 </div>
+
+<%= form_for @task do |f| %>
+
+  <p><%= f.text_field :title %></p>
+
+  <%= f.check_box :done %>
+
+  <%= f.number_field :todo_id :value => @todo.id %>
+
+  <% end %>
