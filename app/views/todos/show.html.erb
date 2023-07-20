@@ -9,12 +9,19 @@
   <%= button_to "Destroy this todo", @todo, method: :delete %>
 </div>
 
+<% @todo.each do |todo| %>
+
+  <p><%= todo.title %></p>
+<% end %>
+
 <%= form_for @task do |f| %>
 
   <p><%= f.text_field :title %></p>
 
-  <%= f.check_box :done %>
+  <%= f.check_box :done, :value => todo.done %>
 
-  <%= f.number_field :todo_id :value => @todo.id %>
+  <%= f.hidden_field :todo_id :value => @todo.id %>
+
+  <%= f.submit "Add Task" %>
 
   <% end %>
