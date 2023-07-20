@@ -9,7 +9,7 @@ class TodosController < ApplicationController
  
   def show
     @task = Task.new
-    @todos = @todo.tasks
+    @tasks = @todo.tasks
   end
 
   
