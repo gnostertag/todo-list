@@ -1,27 +1,32 @@
-<p style="color: green"><%= notice %></p>
+<p>
+  <strong>Name:</strong>
+  <%= @todo.name %>
+</p>
 
-<%= render @todo %>
+<% @tasks.each do |task| %>
 
-<div>
-  <%= link_to "Edit this todo", edit_todo_path(@todo) %> |
-  <%= link_to "Back to todos", todos_path %>
+  <% if task.done == true %>
+    <strike>
+    <p><%= task.title %></p>
+    </strike>
 
-  <%= button_to "Destroy this todo", @todo, method: :delete %>
-</div>
+    <%= form_for task do |f| %>
+      <%= f.check_box :done, :value => task.done %>
+      <%= f.submit "Undo" %>
+    <% end %>
 
-<% @todo.each do |todo| %>
+  <% elsif task.done == false %>
 
-  <p><%= todo.title %></p>
+    <%= form_for task do |f| %>
+      <%= f.check_box :done, :value => task.done %>
+      <%= f.submit "Done" %>
+    <% end %>
+
+  <% end %>
+
 <% end %>
 
 <%= form_for @task do |f| %>
-
   <p><%= f.text_field :title %></p>
-
-  <%= f.check_box :done, :value => todo.done %>
-
-  <%= f.hidden_field :todo_id :value => @todo.id %>
-
   <%= f.submit "Add Task" %>
-
-  <% end %>
+<% end %>

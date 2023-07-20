@@ -10,6 +10,16 @@ class TasksController < ApplicationController
         end
     end
 
+    def update
+        @task =Task.find(params[:id])
+
+        if @task.update(task_params)
+            redirect_to todo_path(@task.todo_id)
+        else 
+            redirect_to root_path
+        end
+    end
+    
     private
 
     def task_params
