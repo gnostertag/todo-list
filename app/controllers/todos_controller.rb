@@ -27,7 +27,7 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
-        format.html { redirect_to todo_url(@todo), notice: "Todo was successfully created." }
+        format.html { redirect_to todo_url(@todo), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @todo }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class TodosController < ApplicationController
   def update
     respond_to do |format|
       if @todo.update(todo_params)
-        format.html { redirect_to todo_url(@todo), notice: "Todo was successfully updated." }
+        format.html { redirect_to todo_url(@todo), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @todo }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -48,13 +48,21 @@ class TodosController < ApplicationController
       end
     end
   end
+  def destroy_task
+    @task = Task.find(params[:task_id])
+    @task.destroy
 
+    respond_to do |format|
+      format.html { redirect_to todo_url(@task.todo), notice: "Task was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
   
   def destroy
     @todo.destroy
 
     respond_to do |format|
-      format.html { redirect_to todos_url, notice: "Todo was successfully destroyed." }
+      format.html { redirect_to todos_url, notice: "Task was successfully destroyed." }
       format.json { head :no_content }
     end
   end
